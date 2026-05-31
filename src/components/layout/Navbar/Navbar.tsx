@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { 
   FiHome,
   FiPackage,
@@ -16,6 +16,7 @@ import {
   FiX
 } from 'react-icons/fi';
 import { MdOutlineLocalOffer } from 'react-icons/md';
+import Link from 'next/link';
 import NavbarTop from './Navbar_Top';
 import NavbarBottom from './Navbar_Bottom';
 
@@ -27,8 +28,11 @@ const Navbar = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    setCartCount(3);
+    const timer = setTimeout(() => {
+      setMounted(true);
+      setCartCount(3);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -43,7 +47,7 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navVariants = {
+  const navVariants: Variants = {
     hidden: { y: -100 },
     visible: { 
       y: 0, 
@@ -55,7 +59,7 @@ const Navbar = () => {
     }
   };
 
-  const mobileMenuVariants = {
+  const mobileMenuVariants: Variants = {
     hidden: { x: '100%' },
     visible: { 
       x: 0, 
@@ -72,9 +76,24 @@ const Navbar = () => {
     visible: (i: number) => ({
       opacity: 1,
       x: 0,
-      transition: { delay: i * 0.08, type: "spring", stiffness: 100 }
+      transition: { delay: i * 0.08, type: "spring" as const, stiffness: 100 }
     })
   };
+
+  const menuItems = [
+    { name: 'Home', icon: FiHome, href: '/' },
+    { name: 'Products', icon: FiPackage, href: '/products' },
+    { name: 'Categories', icon: FiGrid, href: '/categories' },
+    { name: 'Offers', icon: FiTag, href: '/offers', badge: 'New' },
+    { name: 'Wishlist', icon: FiHeart, href: '/wishlist' },
+    { name: 'Contact', icon: FiPhone, href: '/contact' }
+  ];
+
+  const quickLinks = [
+    { name: 'Track Order', icon: FiTruck },
+    { name: 'Best Sellers', icon: FiTrendingUp },
+    { name: 'Flash Deals', icon: FiAward }
+  ];
 
   return (
     <>
@@ -154,57 +173,46 @@ const Navbar = () => {
 
                 <div className="flex flex-col space-y-2">
                   <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-4">Menu</p>
-                  {[
-                    { name: 'Home', icon: FiHome, href: '/' },
-                    { name: 'Products', icon: FiPackage, href: '/products' },
-                    { name: 'Categories', icon: FiGrid, href: '/categories' },
-                    { name: 'Offers', icon: FiTag, href: '/offers', badge: 'New' },
-                    { name: 'Wishlist', icon: FiHeart, href: '/wishlist' },
-                    { name: 'Contact', icon: FiPhone, href: '/contact' }
-                  ].map((item, index) => (
-                    <motion.a
-                      key={item.name}
-                      href={item.href}
-                      custom={index}
-                      variants={menuItemVariants}
-                      initial="hidden"
-                      animate="visible"
-                      whileHover={{ x: 10, backgroundColor: "#FFF7F0" }}
-                      className="flex items-center justify-between py-3 px-4 rounded-lg transition-colors"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <item.icon className="text-accent text-xl" />
-                        <span className="text-gray-700 font-medium">{item.name}</span>
-                      </div>
-                      {item.badge && (
-                        <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                          {item.badge}
-                        </span>
-                      )}
-                    </motion.a>
+                  {menuItems.map((item, index) => (
+                    <Link key={item.name} href={item.href}>
+                      <motion.div
+                        custom={index}
+                        variants={menuItemVariants}
+                        initial="hidden"
+                        animate="visible"
+                        whileHover={{ x: 10, backgroundColor: "#FFF7F0" }}
+                        className="flex items-center justify-between py-3 px-4 rounded-lg transition-colors cursor-pointer"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <item.icon className="text-accent text-xl" />
+                          <span className="text-gray-700 font-medium">{item.name}</span>
+                        </div>
+                        {item.badge && (
+                          <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                            {item.badge}
+                          </span>
+                        )}
+                      </motion.div>
+                    </Link>
                   ))}
                 </div>
 
                 <div className="flex flex-col space-y-2">
                   <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-4">Quick Links</p>
-                  {[
-                    { name: 'Track Order', icon: FiTruck },
-                    { name: 'Best Sellers', icon: FiTrendingUp },
-                    { name: 'Flash Deals', icon: FiAward }
-                  ].map((item, index) => (
-                    <motion.a
-                      key={item.name}
-                      href="#"
-                      custom={index + 6}
-                      variants={menuItemVariants}
-                      initial="hidden"
-                      animate="visible"
-                      whileHover={{ x: 10 }}
-                      className="flex items-center space-x-3 py-2 px-4 text-gray-600"
-                    >
-                      <item.icon className="text-gray-400" />
-                      <span className="text-sm">{item.name}</span>
-                    </motion.a>
+                  {quickLinks.map((item, index) => (
+                    <Link key={item.name} href="#">
+                      <motion.div
+                        custom={index + 6}
+                        variants={menuItemVariants}
+                        initial="hidden"
+                        animate="visible"
+                        whileHover={{ x: 10 }}
+                        className="flex items-center space-x-3 py-2 px-4 text-gray-600 cursor-pointer"
+                      >
+                        <item.icon className="text-gray-400" />
+                        <span className="text-sm">{item.name}</span>
+                      </motion.div>
+                    </Link>
                   ))}
                 </div>
 

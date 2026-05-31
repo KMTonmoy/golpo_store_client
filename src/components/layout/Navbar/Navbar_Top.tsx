@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiSearch, FiUser, FiMenu, FiX, FiArrowLeft } from 'react-icons/fi';
+import Link from 'next/link';
 
 interface NavbarTopProps {
   isOpen: boolean;
@@ -20,7 +21,10 @@ const NavbarTop = ({ isOpen, setIsOpen, isLoggedIn, setIsLoggedIn }: NavbarTopPr
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => {
+      setMounted(true);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -46,9 +50,9 @@ const NavbarTop = ({ isOpen, setIsOpen, isLoggedIn, setIsLoggedIn }: NavbarTopPr
       <div className="hidden md:block px-4 lg:px-16 py-3 border-b border-gray-100 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-6">
-            <a href="/" className="flex-shrink-0 cursor-pointer">
+            <Link href="/" className="flex-shrink-0 cursor-pointer">
               <span className="text-2xl font-bold text-primary">GolpoStore</span>
-            </a>
+            </Link>
             <div className="flex-1 relative">
               <div className="relative">
                 <div className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl bg-white h-[50px]"></div>
@@ -66,16 +70,17 @@ const NavbarTop = ({ isOpen, setIsOpen, isLoggedIn, setIsLoggedIn }: NavbarTopPr
       <div className="hidden md:block px-4 lg:px-16 py-3 border-b border-gray-100 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-6">
-            <motion.a 
-              href="/"
+            <motion.div 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex-shrink-0 cursor-pointer"
             >
-              <span className="text-2xl font-bold text-primary">
-                GolpoStore
-              </span>
-            </motion.a>
+              <Link href="/">
+                <span className="text-2xl font-bold text-primary">
+                  GolpoStore
+                </span>
+              </Link>
+            </motion.div>
 
             <div className="flex-1 relative">
               <div className="relative">
@@ -172,15 +177,16 @@ const NavbarTop = ({ isOpen, setIsOpen, isLoggedIn, setIsLoggedIn }: NavbarTopPr
               </AnimatePresence>
             </div>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setIsLoggedIn(!isLoggedIn)}
-              className="flex items-center space-x-2 bg-primary text-white px-5 py-2.5 rounded-xl font-medium hover:bg-primary/90 transition-all shadow-md hover:shadow-lg"
-            >
-              <FiUser className="text-lg" />
-              <span>{isLoggedIn ? 'My Account' : 'Sign In'}</span>
-            </motion.button>
+            <Link href="/signup">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center space-x-2 bg-primary text-white px-5 py-2.5 rounded-xl font-medium hover:bg-primary/90 transition-all shadow-md hover:shadow-lg cursor-pointer"
+              >
+                <FiUser className="text-lg" />
+                <span>Sign Up</span>
+              </motion.div>
+            </Link>
           </div>
         </div>
       </div>
@@ -223,13 +229,14 @@ const NavbarTop = ({ isOpen, setIsOpen, isLoggedIn, setIsLoggedIn }: NavbarTopPr
                 </AnimatePresence>
               </motion.button>
 
-              <motion.a 
-                href="/" 
+              <motion.div 
                 whileTap={{ scale: 0.95 }}
                 className="flex-shrink-0"
               >
-                <span className="text-xl font-bold text-primary">GolpoStore</span>
-              </motion.a>
+                <Link href="/">
+                  <span className="text-xl font-bold text-primary">GolpoStore</span>
+                </Link>
+              </motion.div>
 
               <div className="flex items-center gap-2">
                 <motion.button
@@ -239,13 +246,14 @@ const NavbarTop = ({ isOpen, setIsOpen, isLoggedIn, setIsLoggedIn }: NavbarTopPr
                 >
                   <FiSearch className="text-xl" />
                 </motion.button>
-                <motion.button
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => setIsLoggedIn(!isLoggedIn)}
-                  className="bg-primary text-white p-2 rounded-lg"
-                >
-                  <FiUser className="text-lg" />
-                </motion.button>
+                <Link href="/signup">
+                  <motion.div
+                    whileTap={{ scale: 0.9 }}
+                    className="bg-primary text-white p-2 rounded-lg cursor-pointer"
+                  >
+                    <FiUser className="text-lg" />
+                  </motion.div>
+                </Link>
               </div>
             </motion.div>
           ) : (
