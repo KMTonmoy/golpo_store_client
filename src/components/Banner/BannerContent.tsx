@@ -21,19 +21,7 @@ const BannerContent = ({ banner }: BannerContentProps) => {
   return (
     <div className="relative h-full flex items-center px-4 md:px-12 lg:px-20">
       <div className="max-w-2xl">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mb-4"
-        >
-          <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold inline-flex items-center gap-1">
-            <FiClock className="text-sm" />
-            {banner.badge}
-          </span>
-        </motion.div>
-
+      
         {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, x: -30 }}
@@ -66,23 +54,7 @@ const BannerContent = ({ banner }: BannerContentProps) => {
 
         
 
-        {/* CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-        >
-          <Link href={banner.buttonLink}>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-gray-900 px-6 md:px-8 py-2.5 md:py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 text-sm md:text-base"
-            >
-              {banner.buttonText}
-              <FiChevronRight className="text-lg" />
-            </motion.button>
-          </Link>
-        </motion.div>
+   
       </div>
     </div>
   );

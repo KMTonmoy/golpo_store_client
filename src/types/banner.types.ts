@@ -5,10 +5,6 @@ export interface Banner {
   description: string;
   image: string;
   mobileImage: string;
-  buttonText: string;
-  buttonLink: string;
-  badge: string;
-  features: string[];
 }
 
 export interface CarouselSettings {

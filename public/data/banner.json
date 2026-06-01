@@ -6,14 +6,7 @@
       "subtitle": "Up to 70% Off",
       "description": "Discover amazing deals on fashion, electronics, and more. Limited time offer!",
       "image": "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=1200&h=600&fit=crop",
-      "mobileImage": "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=800&h=600&fit=crop",
-      "buttonText": "Shop Now",
-      "buttonLink": "/products",
-      "badge": "Limited Time",
-      "badgeColor": "bg-red-500",
-      "features": ["Free Shipping", "30-Day Returns", "Secure Payment"],
-      "gradient": "from-orange-500 to-red-600",
-      "textColor": "text-white"
+      "mobileImage": "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=800&h=600&fit=crop"
     },
     {
       "id": 2,
@@ -21,14 +14,7 @@
       "subtitle": "Latest Tech Arrivals",
       "description": "Get the newest gadgets at unbeatable prices. Premium quality guaranteed.",
       "image": "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1200&h=600&fit=crop",
-      "mobileImage": "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800&h=600&fit=crop",
-      "buttonText": "Explore Electronics",
-      "buttonLink": "/categories/electronics",
-      "badge": "New Arrivals",
-      "badgeColor": "bg-blue-500",
-      "features": ["1 Year Warranty", "Free Tech Support", "Express Delivery"],
-      "gradient": "from-blue-500 to-purple-600",
-      "textColor": "text-white"
+      "mobileImage": "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800&h=600&fit=crop"
     },
     {
       "id": 3,
@@ -36,14 +22,7 @@
       "subtitle": "Trending Styles 2024",
       "description": "Upgrade your wardrobe with our exclusive collection. Shop the latest trends!",
       "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&h=600&fit=crop",
-      "mobileImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&h=600&fit=crop",
-      "buttonText": "Shop Fashion",
-      "buttonLink": "/categories/fashion",
-      "badge": "Trending Now",
-      "badgeColor": "bg-pink-500",
-      "features": ["Free Returns", "Size Exchange", "Member Discount"],
-      "gradient": "from-pink-500 to-rose-600",
-      "textColor": "text-white"
+      "mobileImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&h=600&fit=crop"
     },
     {
       "id": 4,
@@ -51,14 +30,7 @@
       "subtitle": "Transform Your Space",
       "description": "Beautiful home decor and furniture at amazing prices. Make your home beautiful!",
       "image": "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=1200&h=600&fit=crop",
-      "mobileImage": "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=800&h=600&fit=crop",
-      "buttonText": "Explore Collection",
-      "buttonLink": "/categories/home",
-      "badge": "Free Delivery",
-      "badgeColor": "bg-green-500",
-      "features": ["Free Assembly", "2 Years Warranty", "EMI Available"],
-      "gradient": "from-green-500 to-teal-600",
-      "textColor": "text-white"
+      "mobileImage": "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=800&h=600&fit=crop"
     },
     {
       "id": 5,
@@ -66,14 +38,7 @@
       "subtitle": "Limited Time Offer",
       "description": "Get amazing discounts on top products. Hurry up! Offer ends soon.",
       "image": "https://images.unsplash.com/photo-1603183949811-2e374e6f3ee2?w=1200&h=600&fit=crop",
-      "mobileImage": "https://images.unsplash.com/photo-1603183949811-2e374e6f3ee2?w=800&h=600&fit=crop",
-      "buttonText": "Grab Deal",
-      "buttonLink": "/offers",
-      "badge": "Flash Sale",
-      "badgeColor": "bg-yellow-500",
-      "features": ["Up to 80% Off", "Limited Stock", "Price Drop"],
-      "gradient": "from-yellow-500 to-orange-600",
-      "textColor": "text-white"
+      "mobileImage": "https://images.unsplash.com/photo-1603183949811-2e374e6f3ee2?w=800&h=600&fit=crop"
     }
   ],
   "settings": {
