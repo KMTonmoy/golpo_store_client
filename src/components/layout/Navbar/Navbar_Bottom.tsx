@@ -1,30 +1,45 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
-import {
-  FiShoppingCart,
-  FiHeart,
+import React, { useState } from 'react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { 
+  FiShoppingCart, 
+  FiHeart, 
   FiHome,
   FiPackage,
   FiTag,
   FiPhone,
   FiGrid,
   FiPercent,
-  FiX,
-} from "react-icons/fi";
-import Link from "next/link";
-import { NavbarBottomProps, NavItem } from "@/types/types";
+  FiX
+} from 'react-icons/fi';
+import Link from 'next/link';
+
+interface NavItem {
+  name: string;
+  icon: React.ElementType;
+  href?: string;
+  hasDropdown?: boolean;
+  badge?: string | number;
+  onClick?: () => void;
+}
+
+interface NavbarBottomProps {
+  cartCount: number;
+  setCartCount: (value: number) => void;
+  isLoggedIn?: boolean;
+  setIsLoggedIn?: (value: boolean) => void;
+}
 
 const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
   const [showCartModal, setShowCartModal] = useState(false);
   const [showWishlistModal, setShowWishlistModal] = useState(false);
 
   const cartBounce: Variants = {
-    animate: {
+    animate: { 
       scale: [1, 1.3, 1],
-      transition: { duration: 0.4, ease: "easeInOut" },
-    },
+      transition: { duration: 0.4, ease: "easeInOut" }
+    }
   };
 
   const handleAddToCart = () => {
@@ -32,37 +47,24 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
   };
 
   const desktopNavItems: NavItem[] = [
-    { name: "Home", icon: FiHome, href: "/" },
-    { name: "Products", icon: FiPackage, href: "/products", hasDropdown: true },
-    {
-      name: "Categories",
-      icon: FiGrid,
-      href: "/categories",
-      hasDropdown: true,
-    },
-    { name: "Offers", icon: FiTag, href: "/offers", badge: "Hot" },
-    { name: "Contact", icon: FiPhone, href: "/contact" },
+    { name: 'Home', icon: FiHome, href: '/' },
+    { name: 'Products', icon: FiPackage, href: '/products', hasDropdown: true },
+    { name: 'Categories', icon: FiGrid, href: '/categories', hasDropdown: true },
+    { name: 'Offers', icon: FiTag, href: '/offers', badge: 'Hot' },
+    { name: 'Contact', icon: FiPhone, href: '/contact' }
   ];
 
   const mobileNavItems: NavItem[] = [
-    { name: "Home", icon: FiHome, href: "/" },
-    { name: "Shop", icon: FiPackage, href: "/products" },
-    { name: "Offers", icon: FiPercent, href: "/offers" },
-    {
-      name: "Wishlist",
-      icon: FiHeart,
-      onClick: () => setShowWishlistModal(true),
-    },
-    {
-      name: "Cart",
-      icon: FiShoppingCart,
-      onClick: () => setShowCartModal(true),
-      badge: cartCount,
-    },
+    { name: 'Home', icon: FiHome, href: '/' },
+    { name: 'Shop', icon: FiPackage, href: '/products' },
+    { name: 'Offers', icon: FiPercent, href: '/offers' },
+    { name: 'Wishlist', icon: FiHeart, onClick: () => setShowWishlistModal(true) },
+    { name: 'Cart', icon: FiShoppingCart, onClick: () => setShowCartModal(true), badge: cartCount }
   ];
 
   return (
     <>
+      {/* Desktop Bottom Nav - Removed margin bottom */}
       <div className="hidden md:block px-4 lg:px-16 py-3 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between">
@@ -77,7 +79,7 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
                       >
                         <item.icon className="text-base" />
                         <span>{item.name}</span>
-                        {item.badge && typeof item.badge === "string" && (
+                        {item.badge && typeof item.badge === 'string' && (
                           <span className="ml-1 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
                             {item.badge}
                           </span>
@@ -93,7 +95,7 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
                       <span>{item.name}</span>
                     </motion.div>
                   )}
-
+                  
                   {item.hasDropdown && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
@@ -101,12 +103,7 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
                       className="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50"
                     >
                       <div className="py-2">
-                        {[
-                          "New Arrivals",
-                          "Best Sellers",
-                          "Trending Now",
-                          "Limited Edition",
-                        ].map((sub) => (
+                        {['New Arrivals', 'Best Sellers', 'Trending Now', 'Limited Edition'].map((sub) => (
                           <Link key={sub} href="#">
                             <motion.div
                               whileHover={{ x: 5 }}
@@ -160,6 +157,7 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
         </div>
       </div>
 
+      {/* Mobile Bottom Navigation - Removed extra spacing */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200 shadow-2xl z-50">
         <div className="flex items-center justify-around py-2 px-2">
           {mobileNavItems.map((item) => (
@@ -178,22 +176,21 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
             >
               <item.icon className="text-xl text-gray-600" />
               <span className="text-xs mt-1 text-gray-600">{item.name}</span>
-              {item.badge &&
-                typeof item.badge === "number" &&
-                item.badge > 0 && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
-                  >
-                    {item.badge}
-                  </motion.span>
-                )}
+              {item.badge && typeof item.badge === 'number' && item.badge > 0 && (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
+                >
+                  {item.badge}
+                </motion.span>
+              )}
             </motion.button>
           ))}
         </div>
       </div>
 
+      {/* Cart Modal */}
       <AnimatePresence>
         {showCartModal && (
           <>
@@ -202,20 +199,18 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowCartModal(false)}
-              className="fixed inset-0 bg-black/50 z-50"
+              className="fixed inset-0 bg-black/50 z-[60]"
             />
             <motion.div
-              initial={{ x: "100%" }}
+              initial={{ x: '100%' }}
               animate={{ x: 0 }}
-              exit={{ x: "100%" }}
+              exit={{ x: '100%' }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl z-50 overflow-y-auto"
+              className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl z-[60] overflow-y-auto"
             >
               <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold">
-                    Your Cart ({cartCount})
-                  </h2>
+                  <h2 className="text-2xl font-bold">Your Cart ({cartCount})</h2>
                   <motion.button
                     whileTap={{ scale: 0.9 }}
                     onClick={() => setShowCartModal(false)}
@@ -246,9 +241,7 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
                           </div>
                           <motion.button
                             whileTap={{ scale: 0.9 }}
-                            onClick={() =>
-                              setCartCount(Math.max(0, cartCount - 1))
-                            }
+                            onClick={() => setCartCount(Math.max(0, cartCount - 1))}
                             className="text-red-500"
                           >
                             <FiX />
@@ -259,9 +252,7 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
                     <div className="border-t pt-4">
                       <div className="flex justify-between mb-4">
                         <span className="font-semibold">Total:</span>
-                        <span className="font-bold text-primary">
-                          ৳{cartCount * 999}
-                        </span>
+                        <span className="font-bold text-primary">৳{cartCount * 999}</span>
                       </div>
                       <motion.button
                         whileHover={{ scale: 1.02 }}
@@ -279,6 +270,7 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
         )}
       </AnimatePresence>
 
+      {/* Wishlist Modal */}
       <AnimatePresence>
         {showWishlistModal && (
           <>
@@ -287,14 +279,14 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowWishlistModal(false)}
-              className="fixed inset-0 bg-black/50 z-50"
+              className="fixed inset-0 bg-black/50 z-[60]"
             />
             <motion.div
-              initial={{ x: "-100%" }}
+              initial={{ x: '-100%' }}
               animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
+              exit={{ x: '-100%' }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed left-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl z-50 overflow-y-auto"
+              className="fixed left-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl z-[60] overflow-y-auto"
             >
               <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
@@ -308,7 +300,7 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
                   </motion.button>
                 </div>
                 <div className="space-y-4">
-                  {["Product A", "Product B"].map((item, idx) => (
+                  {['Product A', 'Product B'].map((item, idx) => (
                     <motion.div
                       key={idx}
                       initial={{ opacity: 0, x: -20 }}

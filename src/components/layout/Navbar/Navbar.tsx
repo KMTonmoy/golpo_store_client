@@ -26,6 +26,7 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [navbarHeight, setNavbarHeight] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -46,6 +47,25 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const updateNavbarHeight = () => {
+      const navbar = document.querySelector('nav');
+      if (navbar) {
+        const height = navbar.getBoundingClientRect().height;
+        setNavbarHeight(height);
+        document.documentElement.style.setProperty('--navbar-height', `${height}px`);
+      }
+    };
+    
+    updateNavbarHeight();
+    window.addEventListener('resize', updateNavbarHeight);
+    
+    return () => {
+      window.removeEventListener('resize', updateNavbarHeight);
+      document.documentElement.style.removeProperty('--navbar-height');
+    };
+  }, [mounted]);
 
   const navVariants: Variants = {
     hidden: { y: -100 },
@@ -149,7 +169,7 @@ const Navbar = () => {
               exit="exit"
               className="fixed top-[73px] left-0 right-0 bottom-0 bg-white z-40 md:hidden shadow-2xl overflow-y-auto"
             >
-              <div className="flex flex-col p-6 space-y-6">
+              <div className="flex flex-col p-6 space-y-6 pb-32">
                 <motion.div
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -249,8 +269,9 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-      <div className="h-[73px] md:h-[98px]"></div>
-      <div className="md:hidden h-[60px]"></div>
+      {/* Spacer divs - removed margins and added proper positioning */}
+      <div className="hidden md:block" style={{ height: 'var(--navbar-height, 98px)' }} />
+      <div className="md:hidden block" style={{ height: 'var(--navbar-height, 73px)' }} />
     </>
   );
 };

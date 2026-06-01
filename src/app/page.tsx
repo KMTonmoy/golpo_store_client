@@ -1,15 +1,14 @@
+import BannerCarousel from "@/components/Banner/BannerCarousel";
+
 const page = () => {
   return (
-    <div>
-      <h1>Hello World</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam odio,
-        adipisci odit pariatur quo laboriosam necessitatibus sed vel
-        reprehenderit ducimus, esse eligendi possimus omnis neque? Distinctio
-        iste rerum vel impedit, assumenda exercitationem vero cumque similique
-        dolor! Aut deserunt perferendis ut libero quisquam nobis voluptatibus
-        ipsam quis exercitationem itaque, est aliquam!
-      </p>
+    <div className="w-full flex justify-center">
+      <div className="w-full max-w-7xl px-4  mt-5">
+        <div className="flex flex-col gap-10">
+          <BannerCarousel/>
+          <h1 className="  text-2xl font-semibold text-gray-800">Hello World</h1>
+        </div>
+      </div>
     </div>
   );
 };
