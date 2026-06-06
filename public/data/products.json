@@ -1,0 +1,236 @@
+{
+  "products": [
+    {
+      "_id": "4554",
+      "productId": "PRD-001",
+      "name": "Wireless Bluetooth Headphones",
+      "price": 2499,
+      "quantity": 50,
+      "category": "Electronics",
+      "colors": ["Black", "White", "Blue", "Red"],
+      "images": [
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-002",
+      "name": "Premium Cotton T-Shirt",
+      "price": 599,
+      "quantity": 120,
+      "category": "Fashion",
+      "colors": ["Black", "Yellow", "Brown"],
+      "images": [
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-003",
+      "name": "Smart Watch Series 5",
+      "price": 5499,
+      "quantity": 35,
+      "category": "Electronics",
+      "colors": ["Black", "Silver", "Gold", "Rose Gold"],
+      "images": [
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-004",
+      "name": "Leather Office Bag",
+      "price": 1899,
+      "quantity": 25,
+      "category": "Accessories",
+      "colors": ["Brown", "Black", "Tan", "Dark Brown"],
+      "images": [
+        "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1566159391375-42dd8a8489a9?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-005",
+      "name": "Stainless Steel Water Bottle",
+      "price": 399,
+      "quantity": 200,
+      "category": "Home & Living",
+      "colors": ["Black", "Silver", "Blue", "Green", "Pink"],
+      "images": [
+        "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1523362628745-0c100150b504?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1611996573936-365ad2a70d2c?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1610824352934-c10d87b700cc?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-006",
+      "name": "Gaming Mouse RGB",
+      "price": 1299,
+      "quantity": 75,
+      "category": "Electronics",
+      "colors": ["Black", "White", "Red"],
+      "images": [
+        "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1592621385612-4d7129426394?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-007",
+      "name": "Men's Denim Jeans",
+      "price": 1499,
+      "quantity": 90,
+      "category": "Fashion",
+      "colors": ["Blue", "Black", "Gray", "Light Blue"],
+      "images": [
+        "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1475178626620-a4d074967452?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-008",
+      "name": "Yoga Mat Non-Slip",
+      "price": 799,
+      "quantity": 60,
+      "category": "Sports",
+      "colors": ["Purple", "Blue", "Green", "Black", "Pink"],
+      "images": [
+        "https://images.unsplash.com/photo-1592432678016-e910b452f9a2?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-009",
+      "name": "Ceramic Coffee Mug Set",
+      "price": 449,
+      "quantity": 150,
+      "category": "Home & Living",
+      "colors": ["White", "Black", "Blue", "Red", "Green"],
+      "images": [
+        "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1520975734179-6a2b2c2b0d4d?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1517256064527-09c92fc77c9b?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1577937927133-66ef06acdf18?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-010",
+      "name": "Wireless Keyboard",
+      "price": 1899,
+      "quantity": 40,
+      "category": "Electronics",
+      "colors": ["Black", "White", "Silver"],
+      "images": [
+        "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1595225476474-87563907a212?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-011",
+      "name": "Women's Handbag",
+      "price": 2299,
+      "quantity": 30,
+      "category": "Accessories",
+      "colors": ["Black", "Brown", "Red", "Blue", "Beige"],
+      "images": [
+        "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1566159391375-42dd8a8489a9?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-012",
+      "name": "Running Shoes",
+      "price": 2999,
+      "quantity": 45,
+      "category": "Sports",
+      "colors": ["Black/Red", "Blue/White", "Gray/Green", "All Black"],
+      "images": [
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1539185441755-769473a23570?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-013",
+      "name": "LED Desk Lamp",
+      "price": 899,
+      "quantity": 85,
+      "category": "Home & Living",
+      "colors": ["Black", "White", "Silver", "Rose Gold"],
+      "images": [
+        "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1523269223254-9b3c0b35fbca?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1523269223254-9b3c0b35fbca?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-014",
+      "name": "Polarized Sunglasses",
+      "price": 699,
+      "quantity": 110,
+      "category": "Accessories",
+      "colors": ["Black", "Brown", "Blue", "Silver"],
+      "images": [
+        "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1577803645773-d96470509666?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1532247104112-6a0a18b9ad31?w=500&h=500&fit=crop"
+      ]
+    },
+    {
+      "_id": "4554",
+      "productId": "PRD-015",
+      "name": "Power Bank 20000mAh",
+      "price": 1599,
+      "quantity": 55,
+      "category": "Electronics",
+      "colors": ["Black", "White", "Blue", "Red"],
+      "images": [
+        "https://images.unsplash.com/photo-1609592420429-7c4fce6062e5?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1585336261022-680e9cef58e2?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=500&h=500&fit=crop",
+        "https://images.unsplash.com/photo-1609592420429-7c4fce6062e5?w=500&h=500&fit=crop"
+      ]
+    }
+  ],
+  "categories": [
+    "Electronics",
+    "Fashion",
+    "Accessories",
+    "Home & Living",
+    "Sports"
+  ]
+}

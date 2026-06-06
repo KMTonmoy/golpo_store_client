@@ -7,7 +7,7 @@ import BannerContent from './BannerContent';
 import NavigationArrows from './NavigationArrows';
 import DotsNavigation from './DotsNavigation';
 import { Banner, CarouselSettings } from '@/types/banner.types';
-import bannerData from '../../../public/data/banner.json';
+import bannerData from '../../../../public/data/banner.json';
 
 const BannerCarousel = () => {
   const [banners, setBanners] = useState<Banner[]>([]);
