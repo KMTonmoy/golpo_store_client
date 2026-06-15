@@ -1,4 +1,5 @@
 import BannerCarousel from "@/components/Home/Banner/BannerCarousel";
+import BrandShowcase from "@/components/Home/BrandShowcase/BrandShowcase";
 import FlashSale from "@/components/Home/FlashSale/FlashSale";
 import ProductGrid from "@/components/Home/ProductGrid/ProductGrid";
 
@@ -10,6 +11,7 @@ const page = () => {
           <BannerCarousel />
           <FlashSale />
           <ProductGrid />
+          <BrandShowcase/>
         </div>
       </div>
     </div>

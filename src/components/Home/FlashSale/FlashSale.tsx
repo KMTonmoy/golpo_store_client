@@ -32,7 +32,7 @@ const FlashSale = () => {
   if (!saleSettings) return null;
 
   return (
-    <section className="py-8 md:py-12 bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50">
+    <section className="py-8 md:py-12  ">
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl">
         {/* Header Section */}
         <div className="text-center mb-6 md:mb-8">
@@ -88,16 +88,7 @@ const FlashSale = () => {
           </div>
         )}
 
-        {/* View All Link */}
-        <div className="text-center mt-4 md:mt-6">
-          <a
-            href="/flash-sale"
-            className="text-primary hover:text-accent font-medium inline-flex items-center gap-1 text-sm md:text-base"
-          >
-            View All Flash Sale Items
-            <FiTrendingUp className="text-base md:text-lg" />
-          </a>
-        </div>
+
       </div>
     </section>
   );
