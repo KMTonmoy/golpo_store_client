@@ -1,18 +1,19 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Slide from './Slide';
 import BannerContent from './BannerContent';
 import NavigationArrows from './NavigationArrows';
 import DotsNavigation from './DotsNavigation';
- import { Banner, CarouselSettings } from '@/types/banner.types';
+import { Banner, CarouselSettings } from '@/types/banner.types';
 import bannerData from '../../../../public/data/banner.json';
 import BannerSkeleton from '@/components/common/Skeleton/BannerSkeleton';
 
 const BannerCarousel = () => {
   const [banners, setBanners] = useState<Banner[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
   const [settings, setSettings] = useState<CarouselSettings>({
     autoplay: true,
     autoplaySpeed: 5000,
@@ -29,21 +30,17 @@ const BannerCarousel = () => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Simulate loading delay (replace with actual API call)
     const loadBanners = async () => {
-      // Simulate network delay
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
       setBanners(bannerData.banners);
       setSettings(bannerData.settings);
       setLoading(false);
     };
-    
     loadBanners();
   }, []);
 
-  // Define functions before they're used in effects
   const nextSlide = useCallback(() => {
+    setDirection(1);
     setCurrentIndex((prev) => {
       if (settings.infinite && banners.length > 0) {
         return (prev + 1) % banners.length;
@@ -53,6 +50,7 @@ const BannerCarousel = () => {
   }, [banners.length, settings.infinite]);
 
   const prevSlide = useCallback(() => {
+    setDirection(-1);
     setCurrentIndex((prev) => {
       if (settings.infinite && banners.length > 0) {
         return prev === 0 ? banners.length - 1 : prev - 1;
@@ -75,7 +73,6 @@ const BannerCarousel = () => {
     }
   }, []);
 
-  // Autoplay effect
   useEffect(() => {
     if (!loading && settings.autoplay && !isHovered && banners.length > 0) {
       startAutoplay();
@@ -84,6 +81,7 @@ const BannerCarousel = () => {
   }, [currentIndex, settings.autoplay, isHovered, banners.length, startAutoplay, stopAutoplay, loading]);
 
   const goToSlide = (index: number) => {
+    setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
   };
 
@@ -106,7 +104,50 @@ const BannerCarousel = () => {
     setTouchEnd(0);
   };
 
-  // Show skeleton while loading
+  // Slide animation variants
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0,
+      scale: 0.95
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        x: { type: 'spring', stiffness: 300, damping: 30 },
+        opacity: { duration: 0.4 },
+        scale: { duration: 0.4 }
+      }
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? '-100%' : '100%',
+      opacity: 0,
+      scale: 0.95,
+      transition: {
+        x: { type: 'spring', stiffness: 300, damping: 30 },
+        opacity: { duration: 0.3 },
+        scale: { duration: 0.3 }
+      }
+    })
+  };
+
+  // Content animation variants (fade in/out)
+  const contentVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.5, delay: 0.2 }
+    },
+    exit: { 
+      opacity: 0, 
+      y: -20,
+      transition: { duration: 0.3 }
+    }
+  };
+
   if (loading) {
     return <BannerSkeleton />;
   }
@@ -129,12 +170,34 @@ const BannerCarousel = () => {
       >
         {/* Main Banner Container */}
         <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px]">
-          <AnimatePresence mode="wait">
-            <Slide banner={currentBanner} isActive={true} />
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={currentIndex}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="absolute inset-0"
+            >
+              {/* Slide Background */}
+              <Slide banner={currentBanner} isActive={true} />
+              
+              {/* Content with fade animation */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`content-${currentIndex}`}
+                  variants={contentVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  className="relative h-full"
+                >
+                  <BannerContent banner={currentBanner} />
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
           </AnimatePresence>
-
-          {/* Content */}
-          <BannerContent banner={currentBanner} />
 
           {/* Navigation Arrows */}
           <NavigationArrows 

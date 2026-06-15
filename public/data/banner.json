@@ -5,40 +5,65 @@
       "title": "Summer Sale Extravaganza",
       "subtitle": "Up to 70% Off",
       "description": "Discover amazing deals on fashion, electronics, and more. Limited time offer!",
-      "image": "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=1200&h=600&fit=crop",
-      "mobileImage": "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=800&h=600&fit=crop"
+      "buttonText": "Shop Now",
+      "buttonLink": "/products",
+      "badge": "Limited Time",
+      "badgeColor": "bg-red-500",
+      "features": ["Free Shipping", "30-Day Returns", "Secure Payment"],
+      "image": "https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?w=1200&h=600&fit=crop",
+      "mobileImage": "https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?w=800&h=600&fit=crop"
     },
     {
       "id": 2,
-      "title": "Electronics Paradise",
-      "subtitle": "Latest Tech Arrivals",
+      "title": "Tech Paradise",
+      "subtitle": "Latest Electronics",
       "description": "Get the newest gadgets at unbeatable prices. Premium quality guaranteed.",
-      "image": "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1200&h=600&fit=crop",
-      "mobileImage": "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800&h=600&fit=crop"
+      "buttonText": "Explore Now",
+      "buttonLink": "/categories/electronics",
+      "badge": "New Arrivals",
+      "badgeColor": "bg-blue-500",
+      "features": ["1 Year Warranty", "Free Tech Support", "Express Delivery"],
+      "image": "https://images.pexels.com/photos/18105/pexels-photo.jpg?w=1200&h=600&fit=crop",
+      "mobileImage": "https://images.pexels.com/photos/18105/pexels-photo.jpg?w=800&h=600&fit=crop"
     },
     {
       "id": 3,
-      "title": "Fashion Week Special",
+      "title": "Fashion Revolution",
       "subtitle": "Trending Styles 2024",
       "description": "Upgrade your wardrobe with our exclusive collection. Shop the latest trends!",
-      "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&h=600&fit=crop",
-      "mobileImage": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&h=600&fit=crop"
+      "buttonText": "Shop Fashion",
+      "buttonLink": "/categories/fashion",
+      "badge": "Trending Now",
+      "badgeColor": "bg-pink-500",
+      "features": ["Free Returns", "Size Exchange", "Member Discount"],
+      "image": "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?w=1200&h=600&fit=crop",
+      "mobileImage": "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?w=800&h=600&fit=crop"
     },
     {
       "id": 4,
-      "title": "Home & Living",
+      "title": "Home Makeover",
       "subtitle": "Transform Your Space",
       "description": "Beautiful home decor and furniture at amazing prices. Make your home beautiful!",
-      "image": "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=1200&h=600&fit=crop",
-      "mobileImage": "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=800&h=600&fit=crop"
+      "buttonText": "Explore Collection",
+      "buttonLink": "/categories/home",
+      "badge": "Free Delivery",
+      "badgeColor": "bg-green-500",
+      "features": ["Free Assembly", "2 Years Warranty", "EMI Available"],
+      "image": "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?w=1200&h=600&fit=crop",
+      "mobileImage": "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?w=800&h=600&fit=crop"
     },
     {
       "id": 5,
-      "title": "Flash Sale",
+      "title": "Flash Sale Live",
       "subtitle": "Limited Time Offer",
       "description": "Get amazing discounts on top products. Hurry up! Offer ends soon.",
-      "image": "https://images.unsplash.com/photo-1603183949811-2e374e6f3ee2?w=1200&h=600&fit=crop",
-      "mobileImage": "https://images.unsplash.com/photo-1603183949811-2e374e6f3ee2?w=800&h=600&fit=crop"
+      "buttonText": "Grab Deal",
+      "buttonLink": "/offers",
+      "badge": "Flash Sale",
+      "badgeColor": "bg-orange-500",
+      "features": ["Up to 80% Off", "Limited Stock", "Price Drop"],
+      "image": "https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg?w=1200&h=600&fit=crop",
+      "mobileImage": "https://images.pexels.com/photos/5632397/pexels-photo-5632397.jpeg?w=800&h=600&fit=crop"
     }
   ],
   "settings": {
@@ -48,6 +73,7 @@
     "showDots": true,
     "showArrows": true,
     "infinite": true,
-    "speed": 500
+    "speed": 500,
+    "transitionEffect": "slide"
   }
 }
