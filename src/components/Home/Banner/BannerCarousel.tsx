@@ -6,8 +6,9 @@ import Slide from './Slide';
 import BannerContent from './BannerContent';
 import NavigationArrows from './NavigationArrows';
 import DotsNavigation from './DotsNavigation';
-import { Banner, CarouselSettings } from '@/types/banner.types';
+ import { Banner, CarouselSettings } from '@/types/banner.types';
 import bannerData from '../../../../public/data/banner.json';
+import BannerSkeleton from '@/components/common/Skeleton/BannerSkeleton';
 
 const BannerCarousel = () => {
   const [banners, setBanners] = useState<Banner[]>([]);
@@ -22,18 +23,23 @@ const BannerCarousel = () => {
     speed: 500
   });
   const [isHovered, setIsHovered] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const isInitialMount = useRef(true);
 
-  // Load banner data from JSON - using useRef to avoid initial render issues
   useEffect(() => {
-    if (isInitialMount.current) {
+    // Simulate loading delay (replace with actual API call)
+    const loadBanners = async () => {
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       setBanners(bannerData.banners);
       setSettings(bannerData.settings);
-      isInitialMount.current = false;
-    }
+      setLoading(false);
+    };
+    
+    loadBanners();
   }, []);
 
   // Define functions before they're used in effects
@@ -71,11 +77,11 @@ const BannerCarousel = () => {
 
   // Autoplay effect
   useEffect(() => {
-    if (settings.autoplay && !isHovered && banners.length > 0) {
+    if (!loading && settings.autoplay && !isHovered && banners.length > 0) {
       startAutoplay();
     }
     return () => stopAutoplay();
-  }, [currentIndex, settings.autoplay, isHovered, banners.length, startAutoplay, stopAutoplay]);
+  }, [currentIndex, settings.autoplay, isHovered, banners.length, startAutoplay, stopAutoplay, loading]);
 
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
@@ -99,6 +105,11 @@ const BannerCarousel = () => {
     setTouchStart(0);
     setTouchEnd(0);
   };
+
+  // Show skeleton while loading
+  if (loading) {
+    return <BannerSkeleton />;
+  }
 
   if (banners.length === 0) {
     return null;

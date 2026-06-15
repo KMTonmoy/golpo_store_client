@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FiZap, FiTrendingUp } from "react-icons/fi";
 import ProductCard from "@/components/common/ProductCard/ProductCard";
+import ProductSkeleton from "@/components/common/Skeleton/ProductSkeleton";
 import flashSaleData from "../../../../public/data/flashproducts.json";
 import { FlashSaleProduct, SaleSettings } from "@/types/flashsale.types";
 
@@ -15,7 +16,8 @@ const FlashSale = () => {
   const [saleSettings] = useState<SaleSettings | null>(
     flashSaleData.saleSettings,
   );
-  const [visibleCount, setVisibleCount] = useState(8); // Changed to 6 for 2 rows of 3 on mobile
+  const [visibleCount, setVisibleCount] = useState(8);
+  const [loading, setLoading] = useState(false);
 
   const handleAddToCart = (productId: string) => {
     console.log("Add to cart:", productId);
@@ -26,13 +28,21 @@ const FlashSale = () => {
   };
 
   const loadMore = () => {
-    setVisibleCount((prev) => Math.min(prev + 6, flashProducts.length));
+    setLoading(true);
+    // Simulate loading delay
+    setTimeout(() => {
+      setVisibleCount((prev) => Math.min(prev + 6, flashProducts.length));
+      setLoading(false);
+    }, 800);
   };
 
   if (!saleSettings) return null;
 
+  // Show skeleton while loading more products
+  const showSkeleton = loading;
+
   return (
-    <section className="py-8 md:py-12  ">
+    <section className="py-8 md:py-12">
       <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl">
         {/* Header Section */}
         <div className="text-center mb-6 md:mb-8">
@@ -72,10 +82,13 @@ const FlashSale = () => {
               onWishlist={handleWishlist}
             />
           ))}
+          
+          {/* Show skeleton while loading */}
+          {showSkeleton && <ProductSkeleton count={4} />}
         </div>
 
         {/* Load More Button */}
-        {visibleCount < flashProducts.length && (
+        {visibleCount < flashProducts.length && !loading && (
           <div className="text-center mt-8 md:mt-10">
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -88,7 +101,15 @@ const FlashSale = () => {
           </div>
         )}
 
-
+        {/* Loading indicator for load more */}
+        {loading && visibleCount < flashProducts.length && (
+          <div className="text-center mt-8 md:mt-10">
+            <div className="inline-flex items-center gap-2 text-primary">
+              <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+              <span>Loading more products...</span>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
