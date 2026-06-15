@@ -83,7 +83,7 @@ const Footer = () => {
                     {/* About / Contact Info */}
                     <div>
                         <Link href="/" className="inline-block mb-4">
-                            <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                            <h2 className="text-2xl text-white font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                                 GolpoStore
                             </h2>
                         </Link>
