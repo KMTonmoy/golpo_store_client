@@ -1,7 +1,8 @@
 import BannerCarousel from "@/components/Home/Banner/BannerCarousel";
 import BrandShowcase from "@/components/Home/BrandShowcase/BrandShowcase";
+import ContactSection from "@/components/Home/ContactInfo/ContactSection";
 import FlashSale from "@/components/Home/FlashSale/FlashSale";
-import ProductGrid from "@/components/Home/ProductGrid/ProductGrid";
+import ProductGridContainer from "@/components/Home/FeaturedProduct/ProductGridContainer";
 
 const page = () => {
   return (
@@ -10,8 +11,15 @@ const page = () => {
         <div className="flex flex-col gap-10">
           <BannerCarousel />
           <FlashSale />
-          <ProductGrid />
-          <BrandShowcase/>
+          <ProductGridContainer
+            title="Latest Products"
+            type="latest"
+            limit={8}
+            columns={4}
+            sortBy="newest"
+          />
+          <BrandShowcase />
+          <ContactSection />
         </div>
       </div>
     </div>

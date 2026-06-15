@@ -1,3 +1,5 @@
+// types/product.types.ts
+
 export interface Product {
   _id: string;
   productId: string;
@@ -9,7 +11,19 @@ export interface Product {
   images: string[];
 }
 
-export interface ProductsResponse {
-  products: Product[];
-  categories: string[];
+export interface ProductCardProps {
+  product: Product;
+  onAddToCart?: (productId: string) => void;
+  onWishlist?: (productId: string) => void;
 }
+
+export interface ProductGridProps {
+  products: Product[];
+  title?: string;
+  loading?: boolean;
+  columns?: number;
+}
+
+
+ 
+ 

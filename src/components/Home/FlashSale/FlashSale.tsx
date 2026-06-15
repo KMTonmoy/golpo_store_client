@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FiZap, FiTrendingUp } from "react-icons/fi";
-import ProductCard from "@/components/common/Card/Card";
+import ProductCard from "@/components/common/ProductCard/ProductCard";
 import flashSaleData from "../../../../public/data/flashproducts.json";
 import { FlashSaleProduct, SaleSettings } from "@/types/flashsale.types";
 
@@ -15,7 +15,7 @@ const FlashSale = () => {
   const [saleSettings] = useState<SaleSettings | null>(
     flashSaleData.saleSettings,
   );
-  const [visibleCount, setVisibleCount] = useState(6); // Changed to 6 for 2 rows of 3 on mobile
+  const [visibleCount, setVisibleCount] = useState(8); // Changed to 6 for 2 rows of 3 on mobile
 
   const handleAddToCart = (productId: string) => {
     console.log("Add to cart:", productId);

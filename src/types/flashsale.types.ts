@@ -12,7 +12,6 @@ export interface FlashSaleProduct {
 }
 
 export interface SaleSettings {
-  endDate: string;
   isActive: boolean;
   bannerText: string;
   discountPercentage: number;
