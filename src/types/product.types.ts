@@ -5,10 +5,18 @@ export interface Product {
   productId: string;
   name: string;
   price: number;
+  originalPrice?: number;  // Add this
   quantity: number;
   category: string;
   colors: string[];
   images: string[];
+  description?: string;     // Add this
+  features?: string[];      // Add this
+  specifications?: Record<string, string>; // Add this
+  brand?: string;           // Add this
+  sizes?: string[];         // Add this
+  isFlashSale?: boolean;
+  discount?: number;
 }
 
 export interface ProductCardProps {
@@ -23,7 +31,3 @@ export interface ProductGridProps {
   loading?: boolean;
   columns?: number;
 }
-
-
- 
- 

@@ -24,7 +24,7 @@ const ProductGridContainer = ({
     onViewAll,
     className = ''
 }: ProductGridContainerProps) => {
-    const { products, loading, isReady, getLatestProducts, getProductsByCategory } = useProducts();
+    const { products, loading, isReady, getLatestProducts, getProductsByCategory, error } = useProducts();
 
     // Get products based on type
     let displayProducts: Product[] = [];
@@ -87,6 +87,20 @@ const ProductGridContainer = ({
         );
     }
 
+    if (error) {
+        return (
+            <div className="container mx-auto px-4 py-8 text-center">
+                <p className="text-red-500">Error: {error}</p>
+                <button 
+                    onClick={() => window.location.reload()} 
+                    className="mt-4 bg-primary text-white px-4 py-2 rounded-lg"
+                >
+                    Try Again
+                </button>
+            </div>
+        );
+    }
+
     if (displayProducts.length === 0) {
         return null;
     }
@@ -112,7 +126,7 @@ const ProductGridContainer = ({
             <div className={`grid ${gridCols[columns]} gap-4 md:gap-6`}>
                 {displayProducts.map((product) => (
                     <ProductCard
-                        key={product.productId}
+                        key={product._id}
                         {...product}
                         onAddToCart={handleAddToCart}
                         onWishlist={handleWishlist}

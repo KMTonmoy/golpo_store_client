@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import productData from "../../public/data/products.json";
+import axios from "axios";
 import { Product } from "@/types/product.types";
 
 // Extended product type for flash sale property
@@ -9,43 +9,59 @@ interface ExtendedProduct extends Product {
   isFlashSale?: boolean;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
 export const useProducts = () => {
-  // Initialize products directly instead of using setState in useEffect
-  const [products] = useState<Product[]>(() => 
-    [...productData.products].reverse()
-  );
+  const [products, setProducts] = useState<Product[]>([]);
   const [isReady, setIsReady] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const preloadedRef = useRef<Set<string>>(new Set());
 
+  // Fetch products from API
   useEffect(() => {
-    // Preload images only
-    const preloadAllImages = async () => {
-      const imageUrls = productData.products.flatMap(product => product.images);
-      
-      const preloadPromises = imageUrls.map((url) => {
-        return new Promise((resolve) => {
-          if (preloadedRef.current.has(url)) {
-            resolve(true);
-            return;
-          }
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`${API_URL}/api/products`);
+        
+        if (response.data.success) {
+          // Reverse to show latest first
+          const reversedProducts = [...response.data.products].reverse();
+          setProducts(reversedProducts);
           
-          const img = new Image();
-          img.src = url;
-          img.onload = () => {
-            preloadedRef.current.add(url);
-            resolve(true);
-          };
-          img.onerror = () => resolve(false);
-        });
-      });
-      
-      await Promise.all(preloadPromises);
-      setIsReady(true);
-      setLoading(false);
+          // Preload images after getting products
+          const imageUrls = reversedProducts.flatMap(product => product.images);
+          const preloadPromises = imageUrls.map((url) => {
+            return new Promise((resolve) => {
+              if (preloadedRef.current.has(url)) {
+                resolve(true);
+                return;
+              }
+              const img = new Image();
+              img.src = url;
+              img.onload = () => {
+                preloadedRef.current.add(url);
+                resolve(true);
+              };
+              img.onerror = () => resolve(false);
+            });
+          });
+          
+          await Promise.all(preloadPromises);
+          setIsReady(true);
+        } else {
+          setError(response.data.error);
+        }
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        setError("Failed to fetch products");
+      } finally {
+        setLoading(false);
+      }
     };
-    
-    preloadAllImages();
+
+    fetchProducts();
   }, []);
 
   const getLatestProducts = (count: number = 8) => {
@@ -57,7 +73,7 @@ export const useProducts = () => {
   };
 
   const getProductById = (productId: string) => {
-    return products.find(product => product.productId === productId);
+    return products.find(product => product._id === productId);
   };
 
   const getFlashSaleProducts = () => {
@@ -72,6 +88,7 @@ export const useProducts = () => {
     products,
     loading,
     isReady,
+    error,
     getLatestProducts,
     getProductsByCategory,
     getProductById,
