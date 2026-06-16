@@ -1,23 +1,26 @@
+ 
 export interface FlashSaleProduct {
   _id: string;
   productId: string;
   name: string;
   price: number;
-  originalPrice: number;
+  originalPrice?: number;
   quantity: number;
-  sold: number;
   category: string;
   colors: string[];
   images: string[];
-}
-
-export interface SaleSettings {
-  isActive: boolean;
-  bannerText: string;
-  discountPercentage: number;
+  isFlashSale?: boolean;
+  discount?: number;
 }
 
 export interface FlashSaleResponse {
-  flashProducts: FlashSaleProduct[];
-  saleSettings: SaleSettings;
+  success: boolean;
+  products: FlashSaleProduct[];
+  count?: number;
+}
+
+export interface FlashSaleProps {
+  title?: string;
+  limit?: number;
+  showLoadMore?: boolean;
 }

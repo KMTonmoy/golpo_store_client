@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
-import { 
+import {
   FiHome,
   FiPackage,
   FiGrid,
@@ -13,20 +13,29 @@ import {
   FiAward,
   FiTruck,
   FiUser,
-  FiX
+  FiX,
+  FiLogOut,
+  FiSettings,
+  FiShoppingCart
 } from 'react-icons/fi';
 import { MdOutlineLocalOffer } from 'react-icons/md';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { AuthContext } from '@/Provider/AuthProvider';
+import toast from 'react-hot-toast';
 import NavbarTop from './Navbar_Top';
 import NavbarBottom from './Navbar_Bottom';
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const router = useRouter();
+
   const [isOpen, setIsOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [navbarHeight, setNavbarHeight] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -57,36 +66,48 @@ const Navbar = () => {
         document.documentElement.style.setProperty('--navbar-height', `${height}px`);
       }
     };
-    
+
     updateNavbarHeight();
     window.addEventListener('resize', updateNavbarHeight);
-    
+
     return () => {
       window.removeEventListener('resize', updateNavbarHeight);
       document.documentElement.style.removeProperty('--navbar-height');
     };
   }, [mounted]);
 
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      toast.success('Logged out successfully');
+      router.push('/');
+      setIsOpen(false);
+    } catch (error) {
+      console.error('Logout error:', error);
+      toast.error('Failed to logout');
+    }
+  };
+
   const navVariants: Variants = {
     hidden: { y: -100 },
-    visible: { 
-      y: 0, 
-      transition: { 
-        type: "spring", 
-        stiffness: 100, 
+    visible: {
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
         damping: 20
-      } 
+      }
     }
   };
 
   const mobileMenuVariants: Variants = {
     hidden: { x: '100%' },
-    visible: { 
-      x: 0, 
+    visible: {
+      x: 0,
       transition: { type: "spring", stiffness: 300, damping: 30 }
     },
-    exit: { 
-      x: '100%', 
+    exit: {
+      x: '100%',
       transition: { type: "spring", stiffness: 300, damping: 30 }
     }
   };
@@ -109,10 +130,16 @@ const Navbar = () => {
     { name: 'Contact', icon: FiPhone, href: '/contact' }
   ];
 
+  const userMenuItems = [
+    { name: 'My Profile', icon: FiUser, href: '/profile' },
+    { name: 'My Orders', icon: FiShoppingCart, href: '/orders' },
+    { name: 'Dashboard', icon: FiSettings, href: '/dashboard' },
+  ];
+
   const quickLinks = [
-    { name: 'Track Order', icon: FiTruck },
-    { name: 'Best Sellers', icon: FiTrendingUp },
-    { name: 'Flash Deals', icon: FiAward }
+    { name: 'Track Order', icon: FiTruck, href: '/track-order' },
+    { name: 'Best Sellers', icon: FiTrendingUp, href: '/best-sellers' },
+    { name: 'Flash Deals', icon: FiAward, href: '/flash-deals' }
   ];
 
   return (
@@ -121,23 +148,19 @@ const Navbar = () => {
         initial="hidden"
         animate="visible"
         variants={navVariants}
-        className={`fixed top-0 left-0 right-0 bg-white z-50 transition-shadow duration-300 ${
-          scrolling ? 'shadow-2xl' : 'shadow-lg'
-        }`}
+        className={`fixed top-0 left-0 right-0 bg-white z-50 transition-shadow duration-300 ${scrolling ? 'shadow-2xl' : 'shadow-lg'
+          }`}
         suppressHydrationWarning
       >
-        <NavbarTop 
+        <NavbarTop
           isOpen={isOpen}
           setIsOpen={setIsOpen}
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
+          setIsMobileMenuOpen={setIsMobileMenuOpen}
         />
 
         {mounted && (
-          <NavbarBottom 
+          <NavbarBottom
             cartCount={cartCount}
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
             setCartCount={setCartCount}
           />
         )}
@@ -152,6 +175,7 @@ const Navbar = () => {
         )}
       </motion.nav>
 
+      {/* Mobile Menu Sidebar */}
       <AnimatePresence>
         {isOpen && mounted && (
           <>
@@ -170,6 +194,7 @@ const Navbar = () => {
               className="fixed top-[73px] left-0 right-0 bottom-0 bg-white z-40 md:hidden shadow-2xl overflow-y-auto"
             >
               <div className="flex flex-col p-6 space-y-6 pb-32">
+                {/* User Profile Section */}
                 <motion.div
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -178,23 +203,56 @@ const Navbar = () => {
                 >
                   <div className="flex items-center space-x-3">
                     <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+
                       <FiUser className="text-white text-xl" />
+
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <p className="font-semibold text-gray-800">
-                        {isLoggedIn ? 'Welcome Back!' : 'Guest User'}
+                        {user ? user.displayName || user.email?.split('@')[0] : 'Guest User'}
                       </p>
                       <p className="text-sm text-gray-600">
-                        {isLoggedIn ? 'Welcome to GolpoStore' : 'Sign in for better experience'}
+                        {user ? user.email : 'Sign in for better experience'}
                       </p>
                     </div>
+                    {user && (
+                      <button
+                        onClick={handleLogout}
+                        className="text-red-500 p-2 hover:bg-red-50 rounded-full transition-colors"
+                      >
+                        <FiLogOut className="text-xl" />
+                      </button>
+                    )}
                   </div>
                 </motion.div>
 
+                {/* User Menu Items (when logged in) */}
+                {user && (
+                  <div className="flex flex-col space-y-2">
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-4">Account</p>
+                    {userMenuItems.map((item, index) => (
+                      <Link key={item.name} href={item.href} onClick={() => setIsOpen(false)}>
+                        <motion.div
+                          custom={index}
+                          variants={menuItemVariants}
+                          initial="hidden"
+                          animate="visible"
+                          whileHover={{ x: 10, backgroundColor: "#FFF7F0" }}
+                          className="flex items-center space-x-3 py-3 px-4 rounded-lg transition-colors cursor-pointer"
+                        >
+                          <item.icon className="text-accent text-xl" />
+                          <span className="text-gray-700 font-medium">{item.name}</span>
+                        </motion.div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+
+                {/* Main Menu */}
                 <div className="flex flex-col space-y-2">
                   <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-4">Menu</p>
                   {menuItems.map((item, index) => (
-                    <Link key={item.name} href={item.href}>
+                    <Link key={item.name} href={item.href} onClick={() => setIsOpen(false)}>
                       <motion.div
                         custom={index}
                         variants={menuItemVariants}
@@ -217,10 +275,11 @@ const Navbar = () => {
                   ))}
                 </div>
 
+                {/* Quick Links */}
                 <div className="flex flex-col space-y-2">
                   <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-4">Quick Links</p>
                   {quickLinks.map((item, index) => (
-                    <Link key={item.name} href="#">
+                    <Link key={item.name} href={item.href} onClick={() => setIsOpen(false)}>
                       <motion.div
                         custom={index + 6}
                         variants={menuItemVariants}
@@ -236,11 +295,12 @@ const Navbar = () => {
                   ))}
                 </div>
 
+                {/* Special Offer Banner */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="gradient-brand text-white p-4 rounded-xl mt-4"
+                  className="bg-gradient-to-r from-primary to-accent text-white p-4 rounded-xl mt-4"
                 >
                   <div className="flex items-center space-x-3">
                     <MdOutlineLocalOffer className="text-2xl" />
@@ -251,17 +311,18 @@ const Navbar = () => {
                   </div>
                 </motion.div>
 
-                {isLoggedIn && (
-                  <motion.button
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => setIsLoggedIn(false)}
-                    className="mt-4 text-red-500 font-medium py-3 text-center border border-red-200 rounded-lg hover:bg-red-50 transition-colors"
-                  >
-                    Logout
-                  </motion.button>
+                {/* Login/Signup Button for Guests */}
+                {!user && (
+                  <Link href="/signup" onClick={() => setIsOpen(false)}>
+                    <motion.button
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary/90 transition-all"
+                    >
+                      Sign In / Sign Up
+                    </motion.button>
+                  </Link>
                 )}
               </div>
             </motion.div>
@@ -269,7 +330,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-      {/* Spacer divs - removed margins and added proper positioning */}
+      {/* Spacer divs */}
       <div className="hidden md:block" style={{ height: 'var(--navbar-height, 98px)' }} />
       <div className="md:hidden block" style={{ height: 'var(--navbar-height, 73px)' }} />
     </>

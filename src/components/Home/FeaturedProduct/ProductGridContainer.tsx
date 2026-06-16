@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ProductCard from '@/components/common/ProductCard/ProductCard';
-import { useProducts } from '@/Hook/useProducts';
+import { useProducts } from '@/hooks/useProducts';
 import ProductSkeleton from '@/components/common/Skeleton/ProductSkeleton';
 import { ProductGridContainerProps } from '@/types/productGrid.types';
 import { Product } from '@/types/product.types';
