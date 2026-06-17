@@ -38,6 +38,7 @@ import UserInfo from './UserInfo';
 import MenuSection from './MenuSection';
 import LogoutButton from './LogoutButton';
 import { MenuItem } from '@/types/dashboard.types';
+import { AiFillDashboard } from 'react-icons/ai';
 
 const DashboardSidebar = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -64,7 +65,8 @@ const DashboardSidebar = () => {
 
     // Common menu items for all users
     const commonMenuItems: MenuItem[] = [
-        { name: 'Dashboard', href: '/dashboard', icon: FiHome },
+        { name: 'Home', href: '/', icon: FiHome },
+        { name: 'Dashboard', href: '/dashboard', icon: AiFillDashboard },
         { name: 'My Profile', href: '/dashboard/profile', icon: FiUser },
         { name: 'My Orders', href: '/dashboard/orders', icon: FiShoppingCart },
         { name: 'My Wishlist', href: '/dashboard/wishlist', icon: FiHeart },
@@ -159,12 +161,8 @@ const DashboardSidebar = () => {
         }
     };
 
-    const toggleCollapse = () => {
-        setIsCollapsed(!isCollapsed);
-    };
 
-    // Calculate sidebar width for main content padding
-    const sidebarWidth = isCollapsed ? 80 : 256;
+
 
     if (loading) {
         return (
@@ -225,15 +223,7 @@ const DashboardSidebar = () => {
 
                 <Logo isCollapsed={isCollapsed} />
 
-                {/* Collapse Toggle Button - Desktop only */}
-                {isDesktop && (
-                    <button
-                        onClick={toggleCollapse}
-                        className="hidden md:flex absolute -right-3 top-20 bg-white border border-gray-200 rounded-full p-1.5 shadow-md hover:shadow-lg transition-all z-10"
-                    >
-                        {isCollapsed ? <FiChevronRight size={14} /> : <FiChevronDown size={14} className="rotate-90" />}
-                    </button>
-                )}
+
 
                 {/* Scrollable Menu Area */}
                 <div className="h-[calc(100vh-80px)] overflow-y-auto py-6 px-3 custom-scrollbar">
@@ -292,7 +282,7 @@ const DashboardSidebar = () => {
             </motion.aside>
 
             {/* Spacer div to push main content - Only on desktop */}
-            <div 
+            <div
                 className="hidden md:block transition-all duration-300"
                 style={{ width: isCollapsed ? 80 : 256, flexShrink: 0 }}
             />
