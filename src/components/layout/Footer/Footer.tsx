@@ -63,7 +63,7 @@ const Footer = () => {
                                 viewport={{ once: true }}
                                 className="flex items-center gap-3"
                             >
-                                <div className="w-10 h-10 rounded-full bg-primary/20 text-primary flex items-center justify-center">
+                                <div className="w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center">
                                     <feature.icon className="text-xl" />
                                 </div>
                                 <div>

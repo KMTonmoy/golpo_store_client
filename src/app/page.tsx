@@ -14,7 +14,7 @@ const page = () => {
           <ProductGridContainer
             title="Latest Products"
             type="latest"
-            limit={8}
+            limit={16}
             columns={4}
             sortBy="newest"
           />

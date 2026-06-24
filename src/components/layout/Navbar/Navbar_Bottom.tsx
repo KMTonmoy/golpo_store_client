@@ -42,9 +42,7 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
     }
   };
 
-  const handleAddToCart = () => {
-    setCartCount(cartCount + 1);
-  };
+ 
 
   const desktopNavItems: NavItem[] = [
     { name: 'Home', icon: FiHome, href: '/' },
@@ -190,144 +188,7 @@ const NavbarBottom = ({ cartCount, setCartCount }: NavbarBottomProps) => {
         </div>
       </div>
 
-      {/* Cart Modal */}
-      <AnimatePresence>
-        {showCartModal && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowCartModal(false)}
-              className="fixed inset-0 bg-black/50 z-[60]"
-            />
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl z-[60] overflow-y-auto"
-            >
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold">Your Cart ({cartCount})</h2>
-                  <motion.button
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setShowCartModal(false)}
-                    className="text-gray-500"
-                  >
-                    <FiX className="text-2xl" />
-                  </motion.button>
-                </div>
-                {cartCount === 0 ? (
-                  <div className="text-center py-12">
-                    <FiShoppingCart className="text-6xl text-gray-300 mx-auto mb-4" />
-                    <p className="text-gray-500">Your cart is empty</p>
-                  </div>
-                ) : (
-                  <>
-                    <div className="space-y-4 mb-6">
-                      {[1, 2, 3].slice(0, cartCount).map((item) => (
-                        <motion.div
-                          key={item}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          className="flex gap-3 p-3 border rounded-lg"
-                        >
-                          <div className="w-16 h-16 bg-gray-100 rounded-lg"></div>
-                          <div className="flex-1">
-                            <h4 className="font-medium">Product {item}</h4>
-                            <p className="text-sm text-gray-500">৳999</p>
-                          </div>
-                          <motion.button
-                            whileTap={{ scale: 0.9 }}
-                            onClick={() => setCartCount(Math.max(0, cartCount - 1))}
-                            className="text-red-500"
-                          >
-                            <FiX />
-                          </motion.button>
-                        </motion.div>
-                      ))}
-                    </div>
-                    <div className="border-t pt-4">
-                      <div className="flex justify-between mb-4">
-                        <span className="font-semibold">Total:</span>
-                        <span className="font-bold text-primary">৳{cartCount * 999}</span>
-                      </div>
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="w-full bg-primary text-white py-3 rounded-xl font-semibold"
-                      >
-                        Checkout
-                      </motion.button>
-                    </div>
-                  </>
-                )}
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* Wishlist Modal */}
-      <AnimatePresence>
-        {showWishlistModal && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowWishlistModal(false)}
-              className="fixed inset-0 bg-black/50 z-[60]"
-            />
-            <motion.div
-              initial={{ x: '-100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '-100%' }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed left-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl z-[60] overflow-y-auto"
-            >
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold">Your Wishlist</h2>
-                  <motion.button
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setShowWishlistModal(false)}
-                    className="text-gray-500"
-                  >
-                    <FiX className="text-2xl" />
-                  </motion.button>
-                </div>
-                <div className="space-y-4">
-                  {['Product A', 'Product B'].map((item, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                      className="flex gap-3 p-3 border rounded-lg"
-                    >
-                      <div className="w-16 h-16 bg-gray-100 rounded-lg"></div>
-                      <div className="flex-1">
-                        <h4 className="font-medium">{item}</h4>
-                        <p className="text-sm text-gray-500">৳799</p>
-                      </div>
-                      <motion.button
-                        whileTap={{ scale: 0.9 }}
-                        className="bg-primary text-white px-3 py-1 rounded-lg text-sm"
-                        onClick={handleAddToCart}
-                      >
-                        Add to Cart
-                      </motion.button>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+    
     </>
   );
 };

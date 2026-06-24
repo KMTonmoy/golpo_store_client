@@ -108,18 +108,11 @@ const ProductGridContainer = ({
     return (
         <div className={`container mx-auto px-4 py-8 ${className}`}>
             {showTitle && (
-                <div className="flex justify-between items-center mb-8 flex-wrap gap-4">
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
+                <div className="flex justify-center items-center mb-8 flex-wrap gap-4">
+                    <h2 className="text-2xl text-center md:text-3xl font-bold text-gray-800">
                         {title}
                     </h2>
-                    {showViewAll && (
-                        <button
-                            onClick={onViewAll}
-                            className="text-primary hover:text-accent font-medium transition-all inline-flex items-center gap-1 hover:gap-2"
-                        >
-                            View All →
-                        </button>
-                    )}
+             
                 </div>
             )}
 
