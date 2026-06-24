@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 import Slide from './Slide';
 import BannerContent from './BannerContent';
 import NavigationArrows from './NavigationArrows';
@@ -13,7 +13,7 @@ import BannerSkeleton from '@/components/common/Skeleton/BannerSkeleton';
 const BannerCarousel = () => {
   const [banners, setBanners] = useState<Banner[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
+  const [direction, setDirection] = useState(0);
   const [settings, setSettings] = useState<CarouselSettings>({
     autoplay: true,
     autoplaySpeed: 5000,
@@ -104,8 +104,8 @@ const BannerCarousel = () => {
     setTouchEnd(0);
   };
 
-  // Slide animation variants
-  const slideVariants = {
+  // ✅ FIXED: Properly typed slide animation variants
+  const slideVariants: Variants = {
     enter: (direction: number) => ({
       x: direction > 0 ? '100%' : '-100%',
       opacity: 0,
@@ -116,7 +116,7 @@ const BannerCarousel = () => {
       opacity: 1,
       scale: 1,
       transition: {
-        x: { type: 'spring', stiffness: 300, damping: 30 },
+        x: { type: 'spring' as const, stiffness: 300, damping: 30 },
         opacity: { duration: 0.4 },
         scale: { duration: 0.4 }
       }
@@ -126,15 +126,15 @@ const BannerCarousel = () => {
       opacity: 0,
       scale: 0.95,
       transition: {
-        x: { type: 'spring', stiffness: 300, damping: 30 },
+        x: { type: 'spring' as const, stiffness: 300, damping: 30 },
         opacity: { duration: 0.3 },
         scale: { duration: 0.3 }
       }
     })
   };
 
-  // Content animation variants (fade in/out)
-  const contentVariants = {
+  // ✅ FIXED: Properly typed content animation variants
+  const contentVariants: Variants = {
     initial: { opacity: 0, y: 20 },
     animate: { 
       opacity: 1, 

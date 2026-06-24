@@ -94,8 +94,8 @@ const SignupPage = () => {
             transition={{ delay: 0.2 }}
             className="bg-gradient-to-r from-primary to-accent px-6 py-4 text-center"
           >
-            <h1 className="text-2xl font-bold text-white">Create Account</h1>
-            <p className="text-sm text-white/80 mt-1">Join GolpoStore today</p>
+            <h1 className="text-2xl font-bold ">Create Account</h1>
+            <p className="text-sm text-gray-600 mt-1">Join GolpoStore today</p>
           </motion.div>
 
           <div className="px-6 py-6">
