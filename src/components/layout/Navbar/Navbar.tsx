@@ -27,8 +27,12 @@ import NavbarTop from './Navbar_Top';
 import NavbarBottom from './Navbar_Bottom';
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
   const router = useRouter();
+
+  // ✅ Safe access to auth context
+  const user = authContext?.user || null;
+  const logOut = authContext?.logOut || null;
 
   const [isOpen, setIsOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
@@ -77,6 +81,11 @@ const Navbar = () => {
   }, [mounted]);
 
   const handleLogout = async () => {
+    if (!logOut) {
+      toast.error('Logout function not available');
+      return;
+    }
+    
     try {
       await logOut();
       toast.success('Logged out successfully');
@@ -203,19 +212,17 @@ const Navbar = () => {
                 >
                   <div className="flex items-center space-x-3">
                     <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-
                       <FiUser className="text-white text-xl" />
-
                     </div>
                     <div className="flex-1">
                       <p className="font-semibold text-gray-800">
-                        {user ? user.displayName || user.email?.split('@')[0] : 'Guest User'}
+                        {user ? user.displayName || user.email?.split('@')[0] || 'User' : 'Guest User'}
                       </p>
                       <p className="text-sm text-gray-600">
                         {user ? user.email : 'Sign in for better experience'}
                       </p>
                     </div>
-                    {user && (
+                    {user && logOut && (
                       <button
                         onClick={handleLogout}
                         className="text-red-500 p-2 hover:bg-red-50 rounded-full transition-colors"

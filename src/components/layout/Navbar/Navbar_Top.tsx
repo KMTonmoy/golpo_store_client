@@ -15,12 +15,17 @@ interface NavbarTopProps {
 }
 
 const NavbarTop = ({ isOpen, setIsOpen, setIsMobileMenuOpen }: NavbarTopProps) => {
-  const { user, logOut } = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
+  const router = useRouter();
+
+  // ✅ Safe access to auth context
+  const user = authContext?.user || null;
+  const logOut = authContext?.logOut || null;
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobileDropdownRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
 
   const [searchFocused, setSearchFocused] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -69,6 +74,11 @@ const NavbarTop = ({ isOpen, setIsOpen, setIsMobileMenuOpen }: NavbarTopProps) =
   };
 
   const handleLogout = async () => {
+    if (!logOut) {
+      toast.error('Logout function not available');
+      return;
+    }
+    
     try {
       await logOut();
       toast.success('Logged out successfully');
